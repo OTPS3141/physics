@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Oct 17 14:20:21 2020
+
+@author: OTPS
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+import math
+
+import pylab
+
+
+
+N = np.array([1,2,10])
+
+theta = np.linspace(-0.1, 0.1, 1000)
+
+D = 10
+d = 5
+
+factor1 = (2 * np.pi) / (633 * 10**(-3)) * d/2
+factor2 = (2 * np.pi) / (633 * 10**(-3)) * D/2  
+
+
+def sinc(x):
+    return np.sin(x) / x
+
+# def b_grad(x):
+#     return 180/np.pi * x
+
+def intensity(x, N):
+    
+    first = (sinc(factor1 * np.sin(x)))**2
+    
+    second = (np.sin(factor2 * N * np.sin(x)))**2
+    
+    third = (np.sin(factor2 * np.sin(x)))**2
+    
+    return first * (second/third)
+
+
+plt.figure()
+plt.plot(theta, intensity(theta, 1), "b", label = "1 slit")
+plt.plot(theta, intensity(theta, 2)/4, "r", label = "2 slits")
+plt.plot(theta, intensity(theta, 10)/100, "g", label = "10 slits")
+plt.legend(loc = "bottom left")
+plt.show()
+    
+
