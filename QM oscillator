@@ -121,5 +121,4 @@ ax.set_yticks([])
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
-plt.savefig('qho-psi{}.png'.format(PLOT_PROB+1),bbox_inches='tight', dpi=300)
 plt.show()
